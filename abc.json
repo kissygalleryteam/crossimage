@@ -1,0 +1,17 @@
+{
+    "name": "crossimage",
+    "comName":"Crossimage",
+    "version": "0.1",
+    "desc": "",
+    "tag":"多终端 图片",
+    "githubName":"ottomao",
+    "author": {
+        "name": "加里（茅晓锋）",
+        "email": "xiaofeng.mxf@taobao.com",
+        "page": ""
+    },
+	"flexComboPort":"8081",
+	"reserveServerPort":"8080",
+    "type": "kissy-gallery",
+    "type-url": "http://gallery.kissyui.com/guide"
+}
