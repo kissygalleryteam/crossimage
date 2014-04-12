@@ -7,24 +7,26 @@
     <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
 </head>
 <body>
-<h2>Crossimage的demo</h2>
+<h2>Crossimage</h2>
+
 
 <!-- 基本用法 -->
 <div id="containerA">
-    <!-- 已经带了很多后缀的图片，TMS拼接的缘故，原始URL可能天生就是错的 -->
-    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_300x300q90.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
-
-    <!-- 正常图片 -->
+    <h4>正常图片:</h4>
     <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="测试图片"/>
 
-    <!-- 用ignore-crossimage属性来忽略这张图片 -->
+    <h4>已经带了很多后缀的图片，TMS拼接的缘故，原始URL可能天生就是错的:</h4>
+    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_300x300q90.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
+
+    <h4>用ignore-crossimage属性来忽略这张图片的尺寸适配:</h4>
     <img ignore-crossimage data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="测试图片"/>
 </div>
 
 <hr>
 
-<!-- 附带参数用法，包括指定PPI和quaility factor -->
+<!-- 附带参数用法-->
 <div id="containerB">
+    <h4>配置参数，如quality参数，调高PPI显示高清图等</h4>
     <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
 </div>
 
@@ -32,7 +34,7 @@
     var S = KISSY;
 
     //调试代码
-    S.Config.debug = true;
+    // S.Config.debug = true;
     if (S.Config.debug) {
         var srcPath = "../../";
         S.config({
@@ -47,23 +49,20 @@
         });
     }
 
-
-
     S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.1/', function (S,DataLazyload, Crossimage) {
 
-        //基本用法
+        //方法一 使用默认配置
         var conf = {};
         conf.onStart = new Crossimage();
-        new DataLazyload("#containerA",conf)
+        new DataLazyload("#containerA",conf);
 
-        //附带参数
+        //方法二 附带配置参数
         var conf = {};
         conf.onStart = new Crossimage({
             quality:75,
-            userPPI:3
+            userPPI:2
         });
-        new DataLazyload("#containerB",conf)
-
+        new DataLazyload("#containerB",conf);
     });
 </script>
 </body>
