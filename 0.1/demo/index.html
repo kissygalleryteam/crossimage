@@ -9,12 +9,23 @@
 <body>
 <h2>Crossimage的demo</h2>
 
-<div id="container">
-    <!-- 已经带了很多后缀的图片 -->
-    <img data-ks-lazyload="http://i.mmcdn.cn/simba/img/T1gfuCFxRdXXb1upjX.jpg_270x270q90.jpg_.webp" width="240" height="380" alt="天猫春茶节"/>
+<!-- 基本用法 -->
+<div id="containerA">
+    <!-- 已经带了很多后缀的图片，TMS拼接的缘故，原始URL可能天生就是错的 -->
+    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_300x300q90.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
 
     <!-- 正常图片 -->
-    <img data-ks-lazyload="http://img04.taobaocdn.com/imgextra/i4/880734502/T2rbMNXERXXXXXXXXX-880734502.jpg" width="240" height="380" alt="天猫春茶节"/>
+    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="测试图片"/>
+
+    <!-- 用ignore-crossimage属性来忽略这张图片 -->
+    <img ignore-crossimage data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="测试图片"/>
+</div>
+
+<hr>
+
+<!-- 附带参数用法，包括指定PPI和quaility factor -->
+<div id="containerB">
+    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
 </div>
 
 <script>
@@ -39,14 +50,21 @@
 
 
     S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.1/', function (S,DataLazyload, Crossimage) {
+
+        //基本用法
+        var conf = {};
+        conf.onStart = new Crossimage();
+        new DataLazyload("#containerA",conf)
+
+        //附带参数
         var conf = {};
         conf.onStart = new Crossimage({
-            quality:30,
+            quality:75,
             userPPI:3
         });
-        new DataLazyload("#container",conf)
-          // new Crossimage();
-    })
+        new DataLazyload("#containerB",conf)
+
+    });
 </script>
 </body>
 </html>
