@@ -68,5 +68,5 @@ CrossImage是一个datalazyload插件。它结合cdn的图片缩放功能，用�
 
    * 默认配置说明
      * 默认质量参数为90，即```_q90.jpg```
-     * 默认PPI为window.devicePixelRatio || 1，可以手动覆盖
+     * 默认PPI为```window.devicePixelRatio || 1```，可以通过```userPPI```手动覆盖
      * webp检测会自动开启，无法关闭

@@ -638,7 +638,6 @@ KISSY.add('gallery/crossimage/0.1/index',function (S,cdnNearest,WebpSupport) {
                 cdnW = targetPair[0][0].w;
                 cdnH = targetPair[0][0].h;
 
-                console.log("there");
                 finalSrc = rawSrc + "_@Wx@Hq@Q.jpg@WEBP".replace(/@W/i,cdnW).replace(/@H/i,cdnH).replace(/@Q/,_self.config.quality).replace(/@WEBP/,WEBPSUFFIX);
                 obj.src = finalSrc;
             }catch(e){}
