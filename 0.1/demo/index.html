@@ -12,10 +12,10 @@
 
 <!-- 基本用法 -->
 <div id="containerA">
-    <h4>正常图片:</h4>
+    <h4>正常图片，默认参数，会自动配置ppi,quality,webp:</h4>
     <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="测试图片"/>
 
-    <h4>已经带了很多后缀的图片，TMS拼接的缘故，原始URL可能天生就是错的:</h4>
+    <h4>对天生带了多个后缀的URL进行容错:</h4>
     <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_300x300q90.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
 
     <h4>用ignore-crossimage属性来忽略这张图片的尺寸适配:</h4>
@@ -26,7 +26,7 @@
 
 <!-- 附带参数用法-->
 <div id="containerB">
-    <h4>配置参数，如quality参数，调高PPI显示高清图等</h4>
+    <h4>配置参数，如quality参数，自定义PPI显示高清图等</h4>
     <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
 </div>
 
@@ -34,7 +34,7 @@
     var S = KISSY;
 
     //调试代码
-    // S.Config.debug = true;
+    S.Config.debug = true;
     if (S.Config.debug) {
         var srcPath = "../../";
         S.config({
