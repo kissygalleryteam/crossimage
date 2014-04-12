@@ -9,8 +9,19 @@
 <body>
 <h2>Crossimage的demo</h2>
 
+<div id="container">
+    <!-- 已经带了很多后缀的图片 -->
+    <img data-ks-lazyload="http://i.mmcdn.cn/simba/img/T1gfuCFxRdXXb1upjX.jpg_270x270q90.jpg_.webp" width="240" height="380" alt="天猫春茶节"/>
+
+    <!-- 正常图片 -->
+    <img data-ks-lazyload="http://img04.taobaocdn.com/imgextra/i4/880734502/T2rbMNXERXXXXXXXXX-880734502.jpg" width="240" height="380" alt="天猫春茶节"/>
+</div>
+
 <script>
     var S = KISSY;
+
+    //调试代码
+    S.Config.debug = true;
     if (S.Config.debug) {
         var srcPath = "../../";
         S.config({
@@ -25,8 +36,16 @@
         });
     }
 
-    S.use('gallery/crossimage/0.1/index', function (S, Crossimage) {
-          new Crossimage();
+
+
+    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.1/', function (S,DataLazyload, Crossimage) {
+        var conf = {};
+        conf.onStart = new Crossimage({
+            quality:30,
+            userPPI:3
+        });
+        new DataLazyload("#container",conf)
+          // new Crossimage();
     })
 </script>
 </body>
