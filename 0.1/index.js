@@ -19,7 +19,6 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
 
         _self.config = S.merge(defaultConfig,config);
 
-
         function adjustImage(obj){
             if(!obj.elem || !obj.elem.width || !obj.elem.height || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("ignore-crossimage") !== null ) return;
 
@@ -44,13 +43,26 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
                 var rawSrc = currentSrc.replace(/_\d+x\d+(q\d+)?\.jpg/g,"").replace(/_q\d+\.jpg/g,"").replace(/_\.webp/,"");
 
                 //寻找最匹配的宽高
-                var targetPair = cdnNearest({w:expectW, h : expectH} , 2);
-                if(!targetPair || !targetPair[0]) return; //没找到合适的cdn尺寸
-                cdnW = targetPair[0][0].w;
-                cdnH = targetPair[0][0].h;
+                var targetPair = cdnNearest({w:expectW, h : expectH});
 
-                finalSrc = rawSrc + "_@Wx@Hq@Q.jpg@WEBP".replace(/@W/i,cdnW).replace(/@H/i,cdnH).replace(/@Q/,_self.config.quality).replace(/@WEBP/,WEBPSUFFIX);
+                if(!targetPair || !targetPair.w || !targetPair.h){ //没找到合适的cdn尺寸,只处理压缩参数
+                    finalSrc = rawSrc + "_q@Q.jpg@WEBP".replace(/@Q/,_self.config.quality).replace(/@WEBP/,WEBPSUFFIX);
+
+                }else{
+                    cdnW = targetPair.w;
+                    cdnH = targetPair.h;
+                    finalSrc = rawSrc + "_@Wx@Hq@Q.jpg@WEBP".replace(/@W/i,cdnW).replace(/@H/i,cdnH).replace(/@Q/,_self.config.quality).replace(/@WEBP/,WEBPSUFFIX);
+                }
                 obj.src = finalSrc;
+
+
+                if(_self.config && _self.config.debug && console){
+                    console.log("ppi : " + _self.config.userPPI);
+                    console.log("webp : " + WEBPSUFFIX);
+                    console.log("src: __xx__y expect : __ax__b , target : __cx__d".replace(/__x/,imgEle.width).replace(/__y/,imgEle.height).replace(/__a/,expectW).replace(/__b/,expectH).replace(/__c/,cdnW).replace(/__d/,cdnH));
+                    console.log("===========");
+                }
+
             }catch(e){}
         }
         return adjustImage;

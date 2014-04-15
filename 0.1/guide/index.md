@@ -20,14 +20,18 @@ CrossImage是一个datalazyload插件。它结合cdn的图片缩放功能，用�
 
    * 在[DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)的 ```onStart```事件中安插函数，在图片加载前干预url。具体完成：
      * 【尺寸适配】根据图片的宽高和CDN支持的参数列表，自动添加最合适的图片后缀
-     * 【PPI调整】根据PPI设定值，调整图片尺寸
+     * 【PPI调整】根据PPI值，自动调整图片尺寸。
      * 【Webp】自动探测浏览器的webp兼容性，兼容的情况下将自动引入webp图片，节省流量
      * 【url容错】针对常因运营同学复制url引发的后缀重复定义（如 _q90.jpg_q90.jpg），会自动容错。
 
-   * “合适的后缀”是如何计算的？
-     * 期望下载的图片尺寸 = img标签上申明的尺寸（width & height) * ppi
-     * 组件内部存有全部CDN支持的缩放列表
-     * 映射策略 <-文档待续
+   * “合适的尺寸后缀”是如何计算的？
+     * 期望值(定义为expect_x , expect_y) = img标签上申明的尺寸（width 和 height) * ppi
+     * 组件内部存有全部CDN支持的缩放列表(定义为CDN_x , CDN_y)
+     * 期望值与CDN列表的最相似匹配原则
+       * 从CDN列表中，找出宽度、高度均大于等于期望值的尺寸参数，形成候选集
+       * 对于上述候选集中的元素，逐一与期望尺寸进行距离计算。考虑到CDN的等比压缩特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
+       * 距离值最小的CDN参数即为最合适的匹配值
+     * 若无法匹配，则不对尺寸进行处理
 
    * 如果图片url是HTML同步输出在src里，不是lazy-load引入，怎么处理？
      * JS组件不适合这种场景
@@ -60,7 +64,8 @@ CrossImage是一个datalazyload插件。它结合cdn的图片缩放功能，用�
       var conf = {};
       conf.onStart = new Crossimage({
           quality:75,
-          userPPI:2
+          userPPI:2,
+          debug:true
       });
       new DataLazyload("#containerB",conf);
    });
@@ -71,6 +76,7 @@ CrossImage是一个datalazyload插件。它结合cdn的图片缩放功能，用�
      * 默认质量参数为90，即```_q90.jpg```
      * 默认PPI为```window.devicePixelRatio || 1```，可以通过```userPPI```手动覆盖
      * webp检测会自动开启，无法关闭
+     * 配置了debug参数可以打印一些调试信息
 
    * 无论原src带了何种参数后缀，都会被忽略并重新处理
 
