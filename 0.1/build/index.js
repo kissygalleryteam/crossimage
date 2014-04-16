@@ -35,23 +35,37 @@ KISSY.add('gallery/crossimage/0.1/cdnNearest',function(S,cdnPoints) {
 
 	var points = cdnPoints;
 
-	var distance = function(a, b){
+	var customDistance = function(a, b){
 		return  Math.min(Math.abs(a.w - b.w) ,Math.abs(a.h - b.h) ); //  Math.pow(a.w - b.w, 2) +  Math.pow(a.h - b.h, 2);
+	}
+
+	var manhattanDistance = function(a,b){ //曼哈顿距离
+		return Math.abs(a.w - b .w) + Math.abs(a.h - b.h);
 	}
 
 	return function(expect){
 		if(!expect || !expect.w || !expect.h) return;
 
 		var result = {w : 0 , h : 0},
-			minDistance = 1000000;
+			minDistance = 1000000,
+			minManManhattan = 1000000; //最小曼哈顿距离
 		for(var i = 0 ; i < points.length ; i ++){
 			var singlePoint = points[i];
 
 			if(singlePoint.w >= expect.w && singlePoint.h >= expect.h){
-				var d = distance(singlePoint,expect);
-				if(d < minDistance){
+				var d = customDistance(singlePoint,expect),
+					manhattanD = manhattanDistance(singlePoint,expect);
+
+				if(d <= minDistance){ //最小距离
 					minDistance = d;
+					minManManhattan = manhattanD;
 					result = singlePoint;
+
+				}else if(d == minDistance){ //已经是最小距离时，比较曼哈顿距离
+					if(manhattanD < minManManhattan){
+						minManManhattan = manhattanD;
+						result = singlePoint;
+					}
 				}
 			}else{
 				continue; //不在右上角
@@ -136,7 +150,7 @@ KISSY.add('gallery/crossimage/0.1/index',function (S,cdnNearest,WebpSupport) {
     function crossimage(config){
         var _self = this,
             defaultConfig = {
-                quality : 90,
+                quality : window.devicePixelRatio > 1 ? 75 : 90,
                 userPPI : window.devicePixelRatio || 1
             };
 
@@ -194,6 +208,16 @@ KISSY.add('gallery/crossimage/0.1/index',function (S,cdnNearest,WebpSupport) {
     return crossimage;
 
 }, {requires:['./cdnNearest', './webp']});
+
+// Q参数
+// 220    ["q90"] = 0.9,                                                                                 
+// 221    ["Q90"] = 90,                                                                                  
+// 222    ["q75"] = 0.75,                                                                                
+// 223    ["Q75"] = 75,                                                                                  
+// 224    ["q50"] = 0.5,                                                                                 
+// 225    ["Q50"] = 50,                                                                                  
+// 226    ["q30"] = 0.3,                                                                                 
+// 227    ["Q30"] = 30 
 
 
 

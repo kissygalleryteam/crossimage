@@ -13,7 +13,7 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
     function crossimage(config){
         var _self = this,
             defaultConfig = {
-                quality : 90,
+                quality : window.devicePixelRatio > 1 ? 75 : 90,
                 userPPI : window.devicePixelRatio || 1
             };
 
@@ -71,6 +71,16 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
     return crossimage;
 
 }, {requires:['./cdnNearest', './webp']});
+
+// Q参数
+// 220    ["q90"] = 0.9,                                                                                 
+// 221    ["Q90"] = 90,                                                                                  
+// 222    ["q75"] = 0.75,                                                                                
+// 223    ["Q75"] = 75,                                                                                  
+// 224    ["q50"] = 0.5,                                                                                 
+// 225    ["Q50"] = 50,                                                                                  
+// 226    ["q30"] = 0.3,                                                                                 
+// 227    ["Q30"] = 30 
 
 
 
