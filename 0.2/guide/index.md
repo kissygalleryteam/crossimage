@@ -3,7 +3,7 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：0.2 <strong style="color:red">此版本开发中，随时覆盖式发布。预计4月23日发布，需要的同在再耐心等等吧。</strong>
+* 版本：0.2 <strong style="color:red">此版本开发中，随时覆盖式发布。预计4月23日发布，需要的同学再耐心等等吧。</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.1/demo/index.html](http://gallery.kissyui.com/crossimage/0.1/demo/index.html)
 
@@ -14,7 +14,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 为了防止运营填写不合规的图片，很多同学会有意在HTML模板里为图片拼上 ```_50x50q90.jpg``` 这样的后缀。但CDN尺寸参数众多，哪个才是最佳？
    * ipad / Retina Macbook / 各种移动端 ，屏幕PPI不一致。高清化的场景下，需要图片自动适配？
    * 想尝试高性价比的[webp图片](https://developers.google.com/speed/webp/)，还要担心兼容性？能不能根据浏览器环境全自动？
-   * 这时候，```cross image```就出场了。它力求能在跨终端的场景下使用，并降低前端同学的开发成本。
+   * 这时候，天猫前端与核心系统部合作出品```cross image```组件。它力求能在跨终端的场景下使用，并降低前端同学的开发成本。
    
 ## 功能和原理
 
@@ -31,14 +31,14 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
      * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
 
 
-   * [DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件。
-     * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url，自动完成图片适配。
-     * 【尺寸适配】根据图片的宽高和CDN支持的参数列表，自动添加最合适的图片后缀
-     * 【PPI调整】根据PPI值，自动调整图片尺寸和Q参数。
+   * [DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
+     * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url
+     * 【尺寸适配】根据图片的宽高和CDN支持的参数列表，添加最合适的图片后缀
+     * 【PPI调整】根据屏幕PPI值，自动调整图片尺寸和q参数。
      * 【Webp】自动探测浏览器的webp兼容性，兼容的情况下将自动引入webp图片，节省流量
-     * 【url容错】针对常因运营同学复制url引发的后缀重复定义（如 _q90.jpg_q90.jpg），会自动容错。
+     * 【url容错】针对运营同学复制url引发的后缀重复定义（如 _q90.jpg_q90.jpg），会自动容错。
 
-   * 如果图片url是HTML同步输出在页面上，不是通过lazy-load引入，怎么处理？
+   * 如果图片url是HTML同步输出在页面上，不是通过lazyload引入，怎么处理？
      * JS组件不适合这种场景
      * 我们正在着手处理，不久以后就会有通用方案面世。敬请期待！
 
@@ -79,7 +79,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
    * 配置说明
      * 默认质量参数为90，即```_q90.jpg```
-     * 默认PPI为```window.devicePixelRatio || 1```，可以通过```userPPI```手动覆盖
+     * 默认PPI为```window.devicePixelRatio || 1```，可以通过设置```userPPI```覆盖
      * webp检测会自动开启，无法关闭。如果你认为webp的引入影响了业务，可以联系作者。
      * 开启debug参数可以打印一些调试信息
 
@@ -89,17 +89,17 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 ## 自行处理图片URL
    ```
     Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,quality])
-    
+
    ```
 
    ```
     S.use('gallery/crossimage/0.2/', function (S, Crossimage) {
 
         //处理规则和dataLazyload的插件一致
-        var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg_300x300q90.jpg_270x270q90.jpg_.webp",
+        var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
             finalUrl;
 
         finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-        console.log("my img url : " + finalUrl)
+        console.log("my new url : " + finalUrl)
     });
    ```
