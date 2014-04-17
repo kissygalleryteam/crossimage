@@ -3,9 +3,9 @@
 CrossImage是一个datalazyload插件。它结合cdn的图片缩放功能，用来自动调整图片参数，提高性能和体验，降低开发成本。
 
 * 版本：0.1
+* <strong style="color:red">版本说明：v0.1版为测试版本，基本功能已经完成。使用前请充分测试，有坑联系作者 ^_^ </strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.1/demo/index.html](http://gallery.kissyui.com/crossimage/0.1/demo/index.html)
-* **v0.1版为测试版本，随时可能覆盖发布，不建议外部用户试用**
 
 
 ## crossImage的相关背景

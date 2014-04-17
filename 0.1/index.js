@@ -13,7 +13,7 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
     function crossimage(config){
         var _self = this,
             defaultConfig = {
-                quality : window.devicePixelRatio > 1 ? 75 : 90,
+                quality : window.devicePixelRatio > 1 ? 75 : 90,  //dpr > 1时，默认载入q75
                 userPPI : window.devicePixelRatio || 1
             };
 

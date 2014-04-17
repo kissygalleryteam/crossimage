@@ -3,13 +3,14 @@
 
 //为了保证对alpha类webp的完整兼容，这里修改了测试图片
 //Ref : https://developers.google.com/speed/webp/faq#which_web_browsers_natively_support_webp
+//https://developers.google.com/speed/webp/faq
 KISSY.add(function(S) {
 
 	(function() {
 
-	  if (this.WebP) return;
-	  this.WebP = {};
-	     function isSupportStorage(cb) {
+		if (this.WebP) return;
+	  	this.WebP = {};
+	    function isSupportStorage(cb) {
 	        if ((!window.chrome && !window.opera)){
 	            cb(false);
 	            return;
@@ -20,7 +21,7 @@ KISSY.add(function(S) {
 	            cb(val === "true");
 	            return;
 	        }
-	         isSupportTest(function(isSupport){
+	        isSupportTest(function(isSupport){
 	            window.localStorage && window.localStorage.setItem("webpsupport", isSupport);
 	            cb(isSupport);
 	        });
@@ -34,6 +35,7 @@ KISSY.add(function(S) {
 	    }
 	    WebP.isSupport = function(cb) {
 	        if (!cb) return;
+
 	        if(WebP._isSupport===undefined){
 	            isSupportStorage(function(isSupport){
 	                cb(WebP._isSupport=isSupport);
