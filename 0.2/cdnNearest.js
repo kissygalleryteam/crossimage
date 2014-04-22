@@ -3,7 +3,7 @@
 //Ref:http://baike.corp.taobao.com/index.php/CS_RD/tfs/http_server#.E5.B0.BA.E5.AF.B8.E7.94.B3.E8.AF.B7.E6.B5.81.E7.A8.8B
 KISSY.add(function(S,cdnPoints) {
 
-	var points = cdnPoints;
+	var points = cdnPoints.general;
 
 	var customDistance = function(a, b){
 		return  Math.min(Math.abs(a.w - b.w) ,Math.abs(a.h - b.h) ); //  Math.pow(a.w - b.w, 2) +  Math.pow(a.h - b.h, 2);

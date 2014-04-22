@@ -104,7 +104,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
     });
    ```
  
-## 图片下载体积测试数据
+## 图片流量测试数据
 
 ### 测试用原图
   
@@ -112,18 +112,22 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 图片类型大都是商品图片
 * 目标显示尺寸300x300，高清屏下载600x600
 
-### 图片方案
-* q90,300x300 - <strong style="color:red">普通屏幕默认方案</strong>
-  * jpg 1.8M
-  * webp 1.3M
+### 测试结果
+* 不加q参数，300x300
+  * jpg 3.8M
+  * webp 2.3M
+
+* q90,300x300 
+  * jpg 1.8M - <strong style="color:red">普通屏幕+jpg默认方案</strong>
+  * webp 1.3M - <strong style="color:red">普通屏幕+webp默认方案</strong>
 
 * q50,600x600
-  * jpg 2.6M - <strong style="color:red">jpg的高清屏默认方案</strong>
+  * jpg 2.6M - <strong style="color:red">高清屏+jpg默认方案</strong>
   * webp 1.7M
 
 * q75,600x600
   * jpg 3.7M
-  * webp 2.3M - <strong style="color:red">支持webp的高清屏默认方案</strong>
+  * webp 2.3M - <strong style="color:red">高清屏+webp默认方案</strong>
 
 * q90,600x600
   * jpg 5.5M

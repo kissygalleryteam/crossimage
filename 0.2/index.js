@@ -8,19 +8,50 @@
 // 1. 只关心宽或高的情况
 // 2. cdn尺寸查找性能
 // 未指定大小
+// 可视化
+
 
 KISSY.add(function (S,cdnNearest,WebpSupport) {
 
     //webp后缀，不设开关
-    var WEBPSUFFIX = "";
+    var WEBPSUFFIX          = "",
+        DEFAULT_QUALITY         = 90,
+        DEFAULT_HD_JPG_QUALITY  = 50,
+        DEFAULT_HD_WEBP_QUALITY = 75;
+    
     WebpSupport.isSupport(function(isSupport){
         WEBPSUFFIX = isSupport ? "_.webp" : "";
     });
 
-    //
+    //处理质量参数的相关策略，异步
+    function getQuality(userQuality,callback){
+        var resultQuality;
+        if(userQuality){ //用户指定了质量参数
+            resultQuality = userQuality;
+            callback && callback(resultQuality);
+
+        }else{
+            resultQuality = DEFAULT_QUALITY;
+            if(window.devicePixelRatio > 1){
+                WebpSupport.isSupport(function(isSupport){
+                    resultQuality = isSupport ? DEFAULT_HD_WEBP_QUALITY : DEFAULT_HD_JPG_QUALITY;
+                    callback && callback(resultQuality);
+                });                
+            }else{
+                callback && callback(resultQuality);
+            }         
+        }
+    }
+
+
     function adjustImgUrl(srcUrl,expectW,expectH,quality){
         if(!srcUrl || !expectW || !expectH) return srcUrl;
-        quality = quality || 90;
+        if(!quality){
+            quality = DEFAULT_QUALITY;
+            getQuality(null,function(q){
+                quality = q;
+            });
+        }
 
         /*
         把不带参数的原始src找出来
@@ -54,11 +85,17 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
     function datalazyPlugin(config){
         var _self = this,
             defaultConfig = {
-                quality : window.devicePixelRatio > 1 ? 75 : 90,  //dpr > 1时，默认载入q75
+                quality : DEFAULT_QUALITY, //默认载入q90
                 userPPI : window.devicePixelRatio || 1
             };
 
         _self.config = S.merge(defaultConfig,config);
+
+        if(!(config && config.quality)){
+            getQuality(function(q){
+                _self.config.quality = q;
+            });
+        }
 
         function dealLazyObj(obj){
             if(!obj.elem || !obj.elem.width || !obj.elem.height || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("ignore-crossimage") !== null ) return;
@@ -92,16 +129,6 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
     }
 
 }, {requires:['./cdnNearest', './webp']});
-
-// Q参数
-// 220    ["q90"] = 0.9,                                                                                 
-// 221    ["Q90"] = 90,                                                                                  
-// 222    ["q75"] = 0.75,                                                                                
-// 223    ["Q75"] = 75,                                                                                  
-// 224    ["q50"] = 0.5,                                                                                 
-// 225    ["Q50"] = 50,                                                                                  
-// 226    ["q30"] = 0.3,                                                                                 
-// 227    ["Q30"] = 30 
 
 
 

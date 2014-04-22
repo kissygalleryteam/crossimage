@@ -71,6 +71,7 @@
 		"http://gi1.md.alicdn.com/bao/uploadedi1/1027841556/T2p5KbXOFaXXXXXXXX_!!1027841556.jpg"
 	];
 
+
 	//demo调试代码
 	KISSY.Config.debug = true;
 	if (KISSY.Config.debug) {
@@ -88,6 +89,7 @@
 	}
 
 
+
 	KISSY.use(['node','gallery/crossimage/0.2/'], function (S,Node, Crossimage) {
 		var testType = 1; 
 
@@ -98,14 +100,13 @@
 
 			if(testType == 0){ //测试原图
 				resultUrl = imgUrl;		
-			}else if(testType == 1){ //特殊图
-				resultUrl = Crossimage.adjustImgUrl(imgUrl,600,600,90);
+			}else if(testType == 1){ //各种特殊图的参数调整
+				resultUrl = Crossimage.adjustImgUrl(imgUrl,600,600);
+				// resultUrl = Crossimage.adjustImgUrl(imgUrl,600,600,90);
 			}
 
 			Node.one("body").append(imgTpl.replace(/__src/,resultUrl));
-
 		}
-
 	});
 
 </script>
