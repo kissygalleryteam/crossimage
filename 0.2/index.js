@@ -50,7 +50,6 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
                 quality = q;
             });
         }
-
         /*
         把不带参数的原始src找出来
         原始图片形式可能包括：
@@ -88,9 +87,8 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
             };
 
         _self.config = S.merge(defaultConfig,config);
-
         if(!(config && config.quality)){
-            getQuality(function(q){
+            getQuality(undefined, function(q){
                 _self.config.quality = q;
             });
         }

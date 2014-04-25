@@ -52,7 +52,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
       //方法一 使用默认配置
       var conf = {};
-      conf.onStart = new Crossimage.DatalazyPlugin();
+      conf.onStart = new Crossimage.DatalazyPlugin(); //这个api和0.1版不一致
       new DataLazyload("#containerA",conf);
 
       //方法二 附带配置参数
