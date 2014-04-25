@@ -3,7 +3,7 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：0.2 <strong style="color:red">此版本开发中，随时覆盖式发布。预计4月23日发布，需要的同学再耐心等等吧。</strong>
+* 版本：0.2 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.1/demo/index.html](http://gallery.kissyui.com/crossimage/0.1/demo/index.html)
 
@@ -18,18 +18,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    
 ## 功能和原理
 
-   * 插件内置了所有CDN支持的参数列表，会将用户的期望尺寸与CDN参数进行匹配，找到最合适的尺寸后缀
-
-   * “最合适的尺寸”是如何计算的？
-     * 期望值(称为expect_x , expect_y) = img标签上申明的尺寸（width 和 height) * ppi
-     * 将CDN支持的缩放参数列表称为CDN_x , CDN_y
-     * 期望值与CDN参数的最相似匹配原则
-       * 从CDN参数列表中，找出宽度、高度均大于等于期望值的参数，形成候选集
-       * 对于上述候选集中的元素，逐一与期望尺寸进行距离计算。考虑到CDN的等比压缩特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
-       * 距离值最小的CDN参数即为最合适的匹配值
-       * 如果有多个尺寸的距离值均为最小，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的点即可
-     * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
-
+   * 插件内置了所有CDN支持的参数列表，会将用户的期望尺寸、屏幕参数、CDN参数进行匹配，找到最合适的尺寸后缀
 
    * [DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
      * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url
@@ -133,3 +122,13 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   * jpg 5.5M
   * webp 3.5M
 
+
+## “最合适的尺寸”是如何计算的？
+ * 期望值(称为expect_x , expect_y) = img标签上申明的尺寸（width 和 height) * ppi
+ * 将CDN支持的缩放参数列表称为CDN_x , CDN_y
+ * 期望值与CDN参数的最相似匹配原则
+   * 从CDN参数列表中，找出宽度、高度均大于等于期望值的参数，形成候选集
+   * 对于上述候选集中的元素，逐一与期望尺寸进行距离计算。考虑到CDN的等比压缩特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
+   * 距离值最小的CDN参数即为最合适的匹配值
+   * 如果有多个尺寸的距离值均为最小，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的点即可
+ * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
