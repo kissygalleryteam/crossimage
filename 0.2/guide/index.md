@@ -6,7 +6,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 版本：0.2 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
 * 下一版本计划：支持620x10000这种图片形式
 * 作者：加里（茅晓锋）
-* demo：[http://gallery.kissyui.com/crossimage/0.1/demo/index.html](http://gallery.kissyui.com/crossimage/0.1/demo/index.html)
+* demo：[http://gallery.kissyui.com/crossimage/0.2/demo/index.html](http://gallery.kissyui.com/crossimage/0.2/demo/index.html)
 
 
 ## 相关背景
@@ -15,7 +15,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 为了防止运营填写不合规的图片，很多同学会有意在HTML模板里为图片拼上 ```_50x50q90.jpg``` 这样的后缀。但CDN尺寸参数众多，哪个才是最佳？
    * ipad / Retina Macbook / 各种移动端 ，屏幕PPI不一致。高清化的场景下，需要图片自动适配？
    * 想尝试高性价比的[webp图片](https://developers.google.com/speed/webp/)，还要担心兼容性？能不能根据浏览器环境全自动？
-   * 这时候，天猫前端与核心系统部合作出品```cross image```组件。它力求能在跨终端的场景下使用，并降低前端同学的开发成本。
+   * 这时候，天猫前端与核心系统部合作出品```cross image```组件。它力求能在跨终端的场景下完成图片适配，并降低前端同学的开发成本。
    
 ## 功能和原理
 
@@ -48,7 +48,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    
     
    ```
-   S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.1/', function (S,DataLazyload, Crossimage) {
+   S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.2/', function (S,DataLazyload, Crossimage) {
 
       //方法一 使用默认配置
       var conf = {};
