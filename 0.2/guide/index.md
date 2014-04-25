@@ -4,6 +4,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
 * 版本：0.2 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
+* 下一版本计划：支持620x10000这种图片形式
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.1/demo/index.html](http://gallery.kissyui.com/crossimage/0.1/demo/index.html)
 
@@ -51,15 +52,15 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
       //方法一 使用默认配置
       var conf = {};
-      conf.onStart = new Crossimage();
+      conf.onStart = new Crossimage.DatalazyPlugin();
       new DataLazyload("#containerA",conf);
 
       //方法二 附带配置参数
       var conf = {};
-      conf.onStart = new Crossimage({
+      conf.onStart = new Crossimage.DatalazyPlugin({
           quality:75,
           userPPI:2,
-          debug:true
+          debug:true //开启debug,会输出相关信息
       });
       new DataLazyload("#containerB",conf);
    });
