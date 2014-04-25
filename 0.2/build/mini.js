@@ -138,7 +138,6 @@ KISSY.add('gallery/crossimage/0.2/webp',function(S) {
 // 未指定大小
 // 可视化
 
-
 KISSY.add('gallery/crossimage/0.2/index',function (S,cdnNearest,WebpSupport) {
 
     //webp后缀，不设开关
@@ -170,7 +169,6 @@ KISSY.add('gallery/crossimage/0.2/index',function (S,cdnNearest,WebpSupport) {
             }         
         }
     }
-
 
     function adjustImgUrl(srcUrl,expectW,expectH,quality){
         if(!srcUrl || !expectW || !expectH) return srcUrl;
@@ -226,7 +224,7 @@ KISSY.add('gallery/crossimage/0.2/index',function (S,cdnNearest,WebpSupport) {
         }
 
         function dealLazyObj(obj){
-            if(!obj.elem || !obj.elem.width || !obj.elem.height || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("ignore-crossimage") !== null ) return;
+            if(!obj.elem || !obj.elem.getAttribute("width") || !obj.elem.getAttribute("height") || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("ignore-crossimage") !== null ) return;
 
             try{
                 var imgEle = obj.elem,
@@ -257,13 +255,6 @@ KISSY.add('gallery/crossimage/0.2/index',function (S,cdnNearest,WebpSupport) {
     }
 
 }, {requires:['./cdnNearest', './webp']});
-
-
-
-
-
-
-
 /**
  * @fileoverview 
  * @author 加里（茅晓锋）<xiaofeng.mxf@taobao.com>
