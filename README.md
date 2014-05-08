@@ -21,7 +21,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
    * 插件内置了所有CDN支持的参数列表，会将用户的期望尺寸、屏幕参数、CDN参数进行匹配，找到最合适的尺寸后缀
 
-   * [DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
+   * [DataLazyload](http://gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
      * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url
      * 【尺寸适配】根据图片的宽高和CDN支持的参数列表，添加最合适的图片后缀
      * 【PPI调整】根据屏幕PPI值，自动调整图片尺寸和q参数。
