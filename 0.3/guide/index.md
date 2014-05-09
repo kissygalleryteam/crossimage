@@ -7,9 +7,10 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.3/demo/index.html](http://gallery.kissyui.com/crossimage/0.3/demo/index.html)
 * Change Log:
-  * 修改了crossimage-ignore相关属性的名称。
-  * adjustImage的参数API做了修改
-  * 使用了上述特性的用户需要进行修改才能升级。
+  * **[升级用户请关注]修改了crossimage-ignore相关属性的名称**
+  * **[升级用户请关注]adjustImage的参数API做了修改**
+  * 新增对Wx10000这种只关注一条边长的图片进行处理 
+  * 为组件增加单元测试 
 
 
 ## 相关背景
@@ -18,7 +19,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 为了防止运营填写不合规的图片，很多同学会有意在HTML模板里为图片拼上 ```_50x50q90.jpg``` 这样的后缀。但CDN尺寸参数众多，哪个才是最佳？
    * ipad / Retina Macbook / 各种移动端 ，屏幕PPI不一致。高清化的场景下，需要图片自动适配？
    * 想尝试高性价比的[webp图片](https://developers.google.com/speed/webp/)，还要担心兼容性？能不能根据浏览器环境全自动？
-   * 这时候，天猫前端与核心系统部合作出品```cross image```组件。它力求能在跨终端的场景下完成图片适配，并降低前端同学的开发成本。
+   * 为了解决上述问题，天猫前端与核心系统部合作出品```cross image```组件，它力求能在跨终端的场景下完成图片适配，并降低前端同学的开发成本。
    
 ## 功能和原理
 
@@ -31,36 +32,42 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
      * 【Webp】自动探测浏览器的webp兼容性，兼容的情况下将自动引入webp图片，节省流量
      * 【url容错】针对运营同学复制url引发的后缀重复定义（如 _q90.jpg_q90.jpg），会自动容错。
 
-   * 如果图片url是HTML同步输出在页面上，不是通过lazyload引入，怎么处理？
+   * 如果图片url是HTML同步输出在页面上，不是异步加载，怎么处理？
      * JS组件不适合这种场景
-     * 我们正在着手处理，不久以后就会有通用方案面世。敬请期待！
+     * 我们正着手在server端处理，不久以后就会有通用方案面世。敬请期待！
 
 ## DataLazyload插件API
+### Step 1. img标签的用法
+
    * 针对需要lazy-load的图片，必须申明```width```和```heigth```属性
    
    ```
    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" />      
    ```
-   * 如果需要crossImage跳过某些图片的自动适配，申明```ignore-crossimage```属性
 
-   # TODO !!!
-   
+   * 如只需处理宽度或者高度，另一条边等比缩放，即类似 300x10000.jpg 这样的形式，可以声明 ```crossimage-widthOnly``` 或 ```crossimage-heightOnly```属性
+
    ```
-   <img ignore-crossimage data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" alt="这张图片不会被crossImage干预"/>      
+   <img data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150"alt="测试图片"/>
+   <img data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" height="150" alt="测试图片"/>
    ```
 
-   * 引入DataLazyload和crossImage，把crossImage配置为DataLazyload的onStart参数
-   
+   * 如需跳过某些图片的自动适配，可以申明```crossimage-ignore```属性，组件将不处理这张图片
+   ```
+   <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150" height="150" alt="测试图片"/>
+   ```
+
+### Step 2. 引入DataLazyload和crossImage，把crossImage配置为DataLazyload的onStart参数
     
    ```
    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.3/', function (S,DataLazyload, Crossimage) {
 
-      //方法一 使用默认配置
+      //方法A 使用默认配置
       var conf = {};
       conf.onStart = new Crossimage.DatalazyPlugin(); //这个api和0.1版不一致
       new DataLazyload("#containerA",conf);
 
-      //方法二 附带配置参数
+      //方法B 附带配置参数
       var conf = {};
       conf.onStart = new Crossimage.DatalazyPlugin({
           quality:75,
@@ -75,7 +82,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 配置说明
      * 默认质量参数为90，即```_q90.jpg```
      * 默认PPI为```window.devicePixelRatio || 1```，可以通过设置```userPPI```覆盖
-     * webp检测会自动开启，无法关闭。如果你认为webp的引入影响了业务，可以联系作者。
+     * webp检测会自动开启，无法关闭。如果你认为webp的引入影响了业务运作，可以联系作者讨论。
      * 开启debug参数可以打印一些调试信息
 
    * 无论原src带了何种参数后缀，都会被忽略并重新处理
@@ -85,8 +92,11 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   API:
 
    ```
-    Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,quality])
-
+    Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,{
+      quality:50, //支持的图片参数：95,90,75,50,30
+      ignoreHeight:true, //忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
+      ignoreWidth:false
+    }])
    ```
 
    Sample:
@@ -98,8 +108,8 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
         var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
             finalUrl;
 
-        finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-        console.log("my new url : " + finalUrl)
+        finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
+        console.log("new urlB: " + finalUrl); 
     });
    ```
  

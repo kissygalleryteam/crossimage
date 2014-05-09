@@ -31,12 +31,12 @@
     </div>
 
     <div class="block">
-        <h4>添加crossimage-widthOnly属性，将处理成 Wx10000的形式，即只关心宽度,忽略对高度的处理:</h4>
+        <h4>添加crossimage-widthOnly属性，将处理成 Wx10000 的形式，即只关心宽度,忽略对高度的处理:</h4>
         <img crossimage-widthOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150"alt="测试图片"/>
     </div>
 
     <div class="block">
-        <h4>添加crossimage-heightOnly属性，将处理成 10000xH的形式，即只关心高度,忽略对宽度的处理:</h4>
+        <h4>添加crossimage-heightOnly属性，将处理成 10000xH 的形式，即只关心高度,忽略对宽度的处理:</h4>
         <img crossimage-heightOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" height="150" alt="测试图片"/>
     </div>
 
@@ -54,7 +54,7 @@
 
     <div class="block">
         <h4>ppi=1的对比图，非retina屏幕下看不出区别</h4>
-        <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg_300x300q90.jpg" width="150" height="150" alt="测试图片"/>
+        <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg_150x200q90.jpg" width="150" height="150" alt="测试图片"/>
     </div>
 
     <div style="clear:both"></div>
@@ -105,14 +105,14 @@
             finalUrl;
 
         finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-        console.log("new urlA : " + finalUrl)
+        console.log("new urlA : " + finalUrl);
 
         //直接调用图片地址处理方法,只处理宽度
         var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
             finalUrl;
 
-        finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true});
-        console.log("new urlB: " + finalUrl)        
+        finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
+        console.log("new urlB: " + finalUrl);        
         
     });
 

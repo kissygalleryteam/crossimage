@@ -169,8 +169,8 @@ KISSY.add('gallery/crossimage/0.3/webp',function(S) {
  **/
 
 // TODO:
-// 1. 只关心宽或高的情况
-// 2. cdn尺寸查找性能
+// cdn尺寸查找性能
+// 允许指定quality
 // 未指定大小
 // 可视化
 
