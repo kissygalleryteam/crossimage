@@ -119,8 +119,6 @@ KISSY.add(function (S,cdnNearest,WebpSupport) {
                     currentSrc = obj.src,
                     finalSrc;
 
-                    console.log(expectH);
-
                 finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
                     quality: _self.config.quality,
                     ignoreWidth:obj.elem.hasAttribute("crossimage-heightOnly"),

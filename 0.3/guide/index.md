@@ -6,6 +6,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 版本：0.3 <strong style="color:#F00;">此版本开发中，随时覆盖式发布，非项目组同学勿使用。预计发布时间：2014.5.20</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.3/demo/index.html](http://gallery.kissyui.com/crossimage/0.3/demo/index.html)
+* 备用demo：[http://ottomao.github.io/crossimage/0.3/demo/](http://ottomao.github.io/crossimage/0.3/demo/) gallery常会挂掉，你懂的
 * Change Log:
   * **[升级用户请关注]修改了crossimage-ignore相关属性的名称**
   * **[升级用户请关注]adjustImage的参数API做了修改**
