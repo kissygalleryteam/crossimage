@@ -3,7 +3,7 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：0.3 <strong style="color:#F00;">此版本开发中，随时覆盖式发布，外部用户勿使用。预计发布：2014.5.20</strong>
+* 版本：0.3 <strong style="color:#F00;">此版本开发中，随时覆盖式发布，非项目组同学勿使用。预计发布时间：2014.5.20</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.3/demo/index.html](http://gallery.kissyui.com/crossimage/0.3/demo/index.html)
 * Change Log:
@@ -40,7 +40,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 ## 自行处理图片URL
  API:
 
-  ```
+  ```javascript
    Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,{
      quality:50, //支持的图片参数：95,90,75,50,30
      ignoreHeight:true, //忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
@@ -50,7 +50,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
   Sample:
 
-  ```
+  ```javascript
    S.use('gallery/crossimage/0.3/', function (S, Crossimage) {
 
      //直接调用图片地址处理方法,普通图片
@@ -74,26 +74,26 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
    * 针对需要lazy-load的图片，必须申明```width```和```heigth```属性
    
-   ```
+   ```html
    <img data-ks-lazyload="http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg" width="150" height="150" />      
    ```
 
    * 如只需处理宽度或者高度，另一条边等比缩放，即类似 300x10000.jpg 这样的形式，可以声明 ```crossimage-widthOnly``` 或 ```crossimage-heightOnly```属性
 
-   ```
+   ```html
    <img crossimage-widthOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150"alt="测试图片"/>
    <img crossimage-heightOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" height="150" alt="测试图片"/>
    ```
 
    * 如需跳过某些图片的自动适配，可以申明```crossimage-ignore```属性，组件将不处理这张图片
-   ```
+   ```html
    <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150" height="150" alt="测试图片"/>
    ```
 
 ### Step 2. 引入DataLazyload和crossImage，把crossImage配置为DataLazyload的onStart参数
    * Sample
 
-   ```
+   ```javascript
    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.3/', function (S,DataLazyload, Crossimage) {
 
       //方法A 使用默认配置
@@ -159,7 +159,8 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
  * 将CDN支持的缩放参数列表称为CDN_x , CDN_y
  * 期望值与CDN参数的最相似匹配原则
    * 从CDN参数列表中，找出宽度、高度均大于等于期望值的参数，形成候选集
-   * 对于上述候选集中的元素，逐一与期望尺寸进行距离计算。考虑到CDN的等比压缩特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
+   * 对于上述候选集中的元素，逐一与期望尺寸进行距离计算对比。
+   * 考虑到CDN的等比压缩特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
    * 距离值最小的CDN参数即为最合适的匹配值
-   * 如果有多个尺寸的距离值均为最小，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的点即可
+   * 如果有多个尺寸的距离值均为最小，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的点
  * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
