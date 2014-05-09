@@ -7,8 +7,9 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.3/demo/index.html](http://gallery.kissyui.com/crossimage/0.3/demo/index.html)
 * Change Log:
-  * 此版本修改了crossimage-ignore相关属性的名称。
+  * 修改了crossimage-ignore相关属性的名称。
   * adjustImage的参数API做了修改
+  * 使用了上述特性的用户需要进行修改才能升级。
 
 
 ## 相关背景
@@ -23,7 +24,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
    * 插件内置了所有CDN支持的参数列表，会将用户的期望尺寸、屏幕参数、CDN参数进行匹配，找到最合适的尺寸后缀
 
-   * [DataLazyload](gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
+   * [DataLazyload](http://gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
      * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url
      * 【尺寸适配】根据图片的宽高和CDN支持的参数列表，添加最合适的图片后缀
      * 【PPI调整】根据屏幕PPI值，自动调整图片尺寸和q参数。

@@ -13,7 +13,7 @@ KISSY.add(function(S,cdnPoints) {
 	//config.ignoreHeight
 	//config.ignoreWidth
 	return function(config){
-		if(!config || !config.w || !config.h) return;
+		if(!config || (!config.w && !config.h) )  return;
 
 		var result = {w : 0 , h : 0};
 		if(config && ( config.ignoreWidth || config.ignoreHeight) ){

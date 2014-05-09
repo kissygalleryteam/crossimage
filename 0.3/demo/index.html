@@ -8,6 +8,14 @@
 </head>
 <body>
 <h2>Crossimage</h2>
+<h3>加里(茅晓锋)</h3>
+<h3>下方图片宽高均设定为150px，你的显示器dpr = <span id="dprIndicator" style="color:#7F4BE6"></span></h3>
+<script type="text/javascript">
+(function(){
+    var dpr = window.devicePixelRatio ? window.devicePixelRatio : 1;
+    document.getElementById("dprIndicator").innerHTML = dpr;
+})()
+</script>
 
 
 <!-- datalazyLoad插件，基本用法 -->
@@ -108,17 +116,6 @@
         
     });
 
-    S.use('gallery/crossimage/0.3/cdnNearest', function (S, CdnNearest) {
-
-        console.log('-----cdn test----');
-        var p = CdnNearest({
-            w:220,
-            h:150,
-            ignoreHeight:true
-        });
-        console.log(p);
-        console.log('-----cdn test end----');
-    });
 </script>
 
 

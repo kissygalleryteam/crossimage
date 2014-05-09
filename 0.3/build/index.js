@@ -51,7 +51,7 @@ KISSY.add('gallery/crossimage/0.3/cdnNearest',function(S,cdnPoints) {
 	//config.ignoreHeight
 	//config.ignoreWidth
 	return function(config){
-		if(!config || !config.w || !config.h) return;
+		if(!config || (!config.w && !config.h) )  return;
 
 		var result = {w : 0 , h : 0};
 		if(config && ( config.ignoreWidth || config.ignoreHeight) ){
@@ -208,7 +208,7 @@ KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
 
     //config.quality
     function adjustImgUrl(srcUrl,expectW,expectH,config){
-        if(!srcUrl || !expectW || !expectH) return srcUrl;
+        if(!srcUrl || (!expectW && !expectH) ) return srcUrl;
         var quality;
         if(!config || !config.quality){
             quality = DEFAULT_QUALITY;
@@ -218,14 +218,7 @@ KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
         }else{
             quality = config.quality;
         }
-        /*
-        把不带参数的原始src找出来
-        原始图片形式可能包括：
-        http://gtms03.alicdn.com/tps/i3/T1z58XFQpdXXas_LZH-1190-380.png_q75.jpg
-        http://gtms03.alicdn.com/tps/i3/T1z58XFQpdXXas_LZH-1190-380.png_180x180q75.jpg_180x180q75.jpg_180x180q75.jpg
-        http://gtms03.alicdn.com/tps/i3/T1z58XFQpdXXas_LZH-1190-380.png
-        http://gtms03.alicdn.com/tps/i3/T1z58XFQpdXXas_LZH-1190-380.png_.webp
-        */
+
         var rawSrc = srcUrl.replace(/_\d+x\d+(q\d+)?\.jpg/g,"").replace(/_q\d+\.jpg/g,"").replace(/_\.webp/,""),
             finalSrc,
             cdnW,
@@ -281,10 +274,12 @@ KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
 
             try{
                 var imgEle = obj.elem,
-                    expectW = imgEle.width * _self.config.userPPI,
-                    expectH = imgEle.height * _self.config.userPPI,
+                    expectW = imgEle.getAttribute("width")* _self.config.userPPI,
+                    expectH = imgEle.getAttribute("height") * _self.config.userPPI,
                     currentSrc = obj.src,
                     finalSrc;
+
+                    console.log(expectH);
 
                 finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
                     quality: _self.config.quality,
