@@ -4,10 +4,14 @@
  * @module crossimage
  **/
 
+/**
+ * CDN支持的尺寸格式: http://baike.corp.taobao.com/index.php/CS_RD/tfs/http_server#.E5.B0.BA.E5.AF.B8.E7.94.B3.E8.AF.B7.E6.B5.81.E7.A8.8B
+ * 线上配置 :http://img01.taobaocdn.com/L1/8/381/imgsrc_config.lua
+ **/
+
 // TODO:
 // cdn尺寸查找性能
-// 允许指定quality
-// 未指定大小
+// 未指定大小的情况
 // 可视化
 
 KISSY.add(function (S,cdnNearest,WebpSupport) {

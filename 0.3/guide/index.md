@@ -53,12 +53,19 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   ```
    S.use('gallery/crossimage/0.3/', function (S, Crossimage) {
 
-       //处理规则和dataLazyload的插件一致
-       var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
-           finalUrl;
+     //直接调用图片地址处理方法,普通图片
+     var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
+         finalUrl;
 
-       finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
-       console.log("new urlB: " + finalUrl); 
+     finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
+     console.log("new urlA : " + finalUrl);
+
+     //直接调用图片地址处理方法,只处理宽度
+     var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
+         finalUrl;
+
+     finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
+     console.log("new urlB: " + finalUrl); 
    });
   ```
 
@@ -84,7 +91,8 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    ```
 
 ### Step 2. 引入DataLazyload和crossImage，把crossImage配置为DataLazyload的onStart参数
-    
+   * Sample
+
    ```
    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/0.3/', function (S,DataLazyload, Crossimage) {
 
@@ -112,7 +120,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
      * 开启debug参数可以打印一些调试信息
 
    * 无论原src带了何种参数后缀，都会被忽略并重新处理
-   * 这里的api和0.1版稍有不同，请升级而来的用户关注
+   * 这里的api和0.1版稍有不同，请升级用户关注
    * 其他问题：请联系作者 xiaofeng.mxf@taobao.com
 
  

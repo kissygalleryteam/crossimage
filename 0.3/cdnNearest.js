@@ -54,6 +54,8 @@ KISSY.add(function(S,cdnPoints) {
 							result = singlePoint;
 						}
 					}
+				}else if(singlePoint.w < config.w){
+					break; //宽度已经小于目标宽度，直接跳出
 				}else{
 					continue; //不在右上角
 				}
