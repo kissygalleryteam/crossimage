@@ -152,8 +152,8 @@ KISSY.add('gallery/crossimage/0.3/webp',function(S) {
  **/
 
 // TODO:
-// cdn尺寸查找性能
 // 未指定大小的情况
+// 解析HTML string中的dom节点
 // 可视化
 
 KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
@@ -243,7 +243,7 @@ KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
         }
 
         function dealLazyObj(obj){
-            if(!obj.elem || !obj.src || !/http/.test(obj.src) || obj.elem.hasAttribute("crossimage-ignore") ) return;
+            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || obj.elem.hasAttribute("crossimage-ignore") ) return;
             if(obj.elem.hasAttribute("crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
                 if(!obj.elem.hasAttribute("width")) return;
             }else if(obj.elem.hasAttribute("crossimage-heightOnly")){
@@ -260,8 +260,6 @@ KISSY.add('gallery/crossimage/0.3/index',function (S,cdnNearest,WebpSupport) {
                     expectH = imgEle.getAttribute("height") * _self.config.userPPI,
                     currentSrc = obj.src,
                     finalSrc;
-
-                    console.log(expectH);
 
                 finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
                     quality: _self.config.quality,
