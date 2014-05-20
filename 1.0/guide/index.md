@@ -155,7 +155,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   * webp 3.5M
 
 
-## “最合适的尺寸”是如何计算的？
+## 如何计算“最合适的尺寸”？
  * 定义：期望值(称为expect_x , expect_y) = img标签上申明的尺寸（width 和 height) * ppi
  * 定义：CDN_x , CDN_y 为CDN支持的缩放参数列表
  * 匹配原则
