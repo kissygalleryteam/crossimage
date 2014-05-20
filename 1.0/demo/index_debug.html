@@ -71,6 +71,9 @@
 
     //demo调试代码
     S.Config.debug = true;
+    S.config({
+        debug:true
+    });
     if (S.Config.debug) {
         var srcPath = "../../";
         S.config({
@@ -86,38 +89,36 @@
     }
 
     // conf.onStart = new Crossimage.DatalazyPlugin();
-    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/1.0/', function (S,DataLazyload, Crossimage) {
+    S.use('gallery/datalazyload/1.0.1/', function (S,DataLazyload, Crossimage) {
 
         // //datalazyLoad插件，使用默认配置
-        var conf = {};
+        // alert("here");
+        // var conf = {};
+        // conf.onStart = new Crossimage.DatalazyPlugin();
+        new DataLazyload("#containerA");//,conf);
 
-        var plug = new Crossimage.DatalazyPlugin();
-        conf.onStart = plug;
-       
-        new DataLazyload("#containerA",conf);
+        // //datalazyLoad插件，附带配置参数
+        // var conf = {};
+        // conf.onStart = new Crossimage.DatalazyPlugin({
+        //     quality:75,
+        //     userPPI:2,
+        //     debug:true //开启debug,会输出相关信息
+        // });
+        // new DataLazyload("#containerB",conf);
 
-        //datalazyLoad插件，附带配置参数
-        var conf = {};
-        conf.onStart = new Crossimage.DatalazyPlugin({
-            quality:75,
-            userPPI:2,
-            debug:true //开启debug,会输出相关信息
-        });
-        new DataLazyload("#containerB",conf);
-
-        //============================================
-        var srcUrl,
-            finalUrl;
+        // //============================================
+        // var srcUrl,
+        //     finalUrl;
             
-        //直接调用图片地址处理方法,普通图片
-        srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
-        finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-        window.console && console.log("new urlA : " + finalUrl);
+        // //直接调用图片地址处理方法,普通图片
+        // srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
+        // finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
+        // console && console.log("new urlA : " + finalUrl);
 
-        //直接调用图片地址处理方法,只处理宽度
-        srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
-        finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
-        window.console && console.log("new urlB: " + finalUrl);        
+        // //直接调用图片地址处理方法,只处理宽度
+        // srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
+        // finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
+        // console && console.log("new urlB: " + finalUrl);        
         
     });
 

@@ -243,39 +243,39 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
         }
 
         function dealLazyObj(obj){
-            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || obj.elem.hasAttribute("crossimage-ignore") ) return;
-            if(obj.elem.hasAttribute("crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
-                if(!obj.elem.hasAttribute("width")) return;
-            }else if(obj.elem.hasAttribute("crossimage-heightOnly")){
-                if(!obj.elem.hasAttribute("height")) return;
+            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("crossimage-ignore") ) return;
+
+            if(obj.elem.getAttribute("crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
+                if(!obj.elem.width) return;
+            }else if(obj.elem.getAttribute("crossimage-heightOnly")){
+                if(!obj.elem.height) return;
             }else{
-                if(!obj.elem.hasAttribute("height") || !obj.elem.hasAttribute("width")) {
+                if(!obj.elem.height || !obj.elem.width) {
                     return;
                 }
             }
 
             try{
                 var imgEle = obj.elem,
-                    expectW = imgEle.getAttribute("width")* _self.config.userPPI,
-                    expectH = imgEle.getAttribute("height") * _self.config.userPPI,
+                    expectW = imgEle.width * _self.config.userPPI,
+                    expectH = imgEle.height * _self.config.userPPI,
                     currentSrc = obj.src,
                     finalSrc;
 
                 finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
                     quality: _self.config.quality,
-                    ignoreWidth:obj.elem.hasAttribute("crossimage-heightOnly"),
-                    ignoreHeight:obj.elem.hasAttribute("crossimage-widthOnly")
+                    ignoreWidth:obj.elem.getAttribute("crossimage-heightOnly"),
+                    ignoreHeight:obj.elem.getAttribute("crossimage-widthOnly")
                 });
                 obj.src = finalSrc;
 
-                if(_self.config && _self.config.debug && console){
+                if(_self.config && _self.config.debug && window.console){
                     console.log("ppi : " + _self.config.userPPI);
                     console.log("webp : " + WEBPSUFFIX);
                     console.log("src: __xx__y expect : __ax__b".replace(/__a/,expectW).replace(/__b/,expectH).replace(/__x/,imgEle.width).replace(/__y/,imgEle.height));
                     console.log("target: " + finalSrc);
                     console.log("===========");
                 }
-
             }catch(e){}
         }
         return dealLazyObj;
