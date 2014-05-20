@@ -21,6 +21,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * ipad / Retina Macbook / 各种移动端 ，屏幕PPI不一致。高清化的场景下，需要图片自动适配？
    * 想尝试高性价比的[webp图片](https://developers.google.com/speed/webp/)，还要担心兼容性？能不能根据浏览器环境全自动？
    * **为了解决上述问题，天猫前端与核心系统部合作出品```cross image```组件，它力求能在跨终端的场景下完成图片适配，并降低前端同学的开发成本。**
+   * ![功能结构图](http://gtms01.alicdn.com/tps/i1/T14TEnFKxbXXaJE4Yg-1027-382.png_720x720.jpg)
    
 ## 功能和原理
 
