@@ -90,10 +90,7 @@
 
         // //datalazyLoad插件，使用默认配置
         var conf = {};
-
-        var plug = new Crossimage.DatalazyPlugin();
-        conf.onStart = plug;
-       
+        conf.onStart = new Crossimage.DatalazyPlugin();
         new DataLazyload("#containerA",conf);
 
         //datalazyLoad插件，附带配置参数
@@ -104,6 +101,7 @@
             debug:true //开启debug,会输出相关信息
         });
         new DataLazyload("#containerB",conf);
+
 
         //============================================
         var srcUrl,

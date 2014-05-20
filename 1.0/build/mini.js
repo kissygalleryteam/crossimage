@@ -256,7 +256,7 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
                 }
             }
 
-            try{
+            // try{
                 var imgEle = obj.elem,
                     expectW = imgEle.width * _self.config.userPPI,
                     expectH = imgEle.height * _self.config.userPPI,
@@ -277,7 +277,7 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
                     console.log("target: " + finalSrc);
                     console.log("===========");
                 }
-            }catch(e){}
+            // }catch(e){}
         }
         return dealLazyObj;
     }
