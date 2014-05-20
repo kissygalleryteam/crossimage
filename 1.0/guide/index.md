@@ -3,7 +3,7 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：1.0 <strong style="color:#F00;">此版本开发中，随时覆盖式发布，非项目组同学勿使用。预计发布时间：2014.5.20</strong>
+* 版本：1.0 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/1.0/demo/index.html](http://gallery.kissyui.com/crossimage/1.0/demo/index.html)
 * 备用demo：[http://ottomao.github.io/crossimage/1.0/demo/](http://ottomao.github.io/crossimage/1.0/demo/) gallery常会挂掉，你懂的
