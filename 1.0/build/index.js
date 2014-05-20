@@ -228,6 +228,15 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
         return finalSrc;
     }
 
+    //兼容IE6，7，8
+    function hasAttribute(el,name){
+        if(el.hasAttribute){
+            return el.hasAttribute(name);
+        }else{
+            return (typeof el.getAttribute(name) == "string");
+        }
+    }
+
     function datalazyPlugin(config){
         var _self = this,
             defaultConfig = {
@@ -243,11 +252,11 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
         }
 
         function dealLazyObj(obj){
-            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || obj.elem.getAttribute("crossimage-ignore") ) return;
+            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || hasAttribute(obj.elem,"crossimage-ignore") ) return;
 
-            if(obj.elem.getAttribute("crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
+            if(hasAttribute(obj.elem,"crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
                 if(!obj.elem.width) return;
-            }else if(obj.elem.getAttribute("crossimage-heightOnly")){
+            }else if(hasAttribute(obj.elem,"crossimage-heightOnly")){
                 if(!obj.elem.height) return;
             }else{
                 if(!obj.elem.height || !obj.elem.width) {
@@ -255,7 +264,7 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
                 }
             }
 
-            // try{
+            try{
                 var imgEle = obj.elem,
                     expectW = imgEle.width * _self.config.userPPI,
                     expectH = imgEle.height * _self.config.userPPI,
@@ -264,8 +273,8 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
 
                 finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
                     quality: _self.config.quality,
-                    ignoreWidth:obj.elem.getAttribute("crossimage-heightOnly"),
-                    ignoreHeight:obj.elem.getAttribute("crossimage-widthOnly")
+                    ignoreWidth: hasAttribute(obj.elem,"crossimage-heightOnly"),
+                    ignoreHeight:hasAttribute(obj.elem,"crossimage-widthOnly")
                 });
                 obj.src = finalSrc;
 
@@ -276,7 +285,7 @@ KISSY.add('gallery/crossimage/1.0/index',function (S,cdnNearest,WebpSupport) {
                     console.log("target: " + finalSrc);
                     console.log("===========");
                 }
-            // }catch(e){}
+            }catch(e){}
         }
         return dealLazyObj;
     }
