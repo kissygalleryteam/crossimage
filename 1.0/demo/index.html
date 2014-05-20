@@ -109,12 +109,12 @@
         //直接调用图片地址处理方法,普通图片
         srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
         finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-        console.log("new urlA : " + finalUrl);
+        console && console.log("new urlA : " + finalUrl);
 
         //直接调用图片地址处理方法,只处理宽度
         srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
         finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
-        console.log("new urlB: " + finalUrl);        
+        console && console.log("new urlB: " + finalUrl);        
         
     });
 
