@@ -1,7 +1,7 @@
 {
     "name": "crossimage",
     "comName":"Crossimage",
-    "version": "0.3",
+    "version": "1.0",
     "desc": "解决aliCDN上的图片缩放和流量问题，包括图片适用的CDN尺寸、自动加载webp、适配高清屏等。",
     "tag":"多终端 图片",
     "githubName":"ottomao",

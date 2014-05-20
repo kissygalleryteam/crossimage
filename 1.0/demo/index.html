@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Crossimage的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.1/seed-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+</head>
+<body>
+<h2>Crossimage</h2>
+<h3>加里(茅晓锋)</h3>
+<h3>下方图片宽高均设定为150px，你的显示器dpr = <span id="dprIndicator" style="color:#7F4BE6"></span></h3>
+<script type="text/javascript">
+(function(){
+    var dpr = window.devicePixelRatio ? window.devicePixelRatio : 1;
+    document.getElementById("dprIndicator").innerHTML = dpr;
+})()
+</script>
+
+
+<!-- datalazyLoad插件，基本用法 -->
+<div id="containerA">
+    <div class="block">
+        <h4>默认参数，会自动配置ppi/quality/webp，并对多后周的URL进行容错:</h4>
+        <img data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150" height="150" alt="测试图片"/>
+    </div>
+
+    <div class="block">
+        <h4>添加crossimage-ignore属性，将不会处理这张图:</h4>
+        <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150" height="150" alt="测试图片"/>
+    </div>
+
+    <div class="block">
+        <h4>添加crossimage-widthOnly属性，将处理成 Wx10000 的形式，即只关心宽度,忽略对高度的处理:</h4>
+        <img crossimage-widthOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" width="150"alt="测试图片"/>
+    </div>
+
+    <div class="block">
+        <h4>添加crossimage-heightOnly属性，将处理成 10000xH 的形式，即只关心高度,忽略对宽度的处理:</h4>
+        <img crossimage-heightOnly data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg" height="150" alt="测试图片"/>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+<hr>
+
+<!-- datalazyLoad插件，附带参数用法-->
+<div id="containerB">
+    <div class="block">
+        <h4>自定义参数，如quality参数，自定义PPI显示高清图等</h4>
+        <img data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg_270x270q90.jpg_.webp" width="150" height="150" alt="测试图片"/>
+    </div>
+
+    <div class="block">
+        <h4>ppi=1的对比图，非retina屏幕下看不出区别</h4>
+        <img crossimage-ignore data-ks-lazyload="http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg_150x200q90.jpg" width="150" height="150" alt="测试图片"/>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+<!-- 直接调用组件方法处理url -->
+<!-- 见console -->
+
+<script>
+    var S = KISSY;
+
+    //demo调试代码
+    S.Config.debug = true;
+    if (S.Config.debug) {
+        var srcPath = "../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery/crossimage",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+
+    S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/1.0/', function (S,DataLazyload, Crossimage) {
+
+        //datalazyLoad插件，使用默认配置
+        var conf = {};
+        conf.onStart = new Crossimage.DatalazyPlugin();
+        new DataLazyload("#containerA",conf);
+
+        //datalazyLoad插件，附带配置参数
+        var conf = {};
+        conf.onStart = new Crossimage.DatalazyPlugin({
+            quality:75,
+            userPPI:2,
+            debug:true //开启debug,会输出相关信息
+        });
+        new DataLazyload("#containerB",conf);
+
+        //============================================
+        var srcUrl,
+            finalUrl;
+            
+        //直接调用图片地址处理方法,普通图片
+        srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
+        finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
+        console.log("new urlA : " + finalUrl);
+
+        //直接调用图片地址处理方法,只处理宽度
+        srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg";
+        finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
+        console.log("new urlB: " + finalUrl);        
+        
+    });
+
+</script>
+
+
+<style>
+/*都是demo中的样式，组件使用时无需引入*/
+.block{
+    float: left;
+    width: 330px;
+    margin-left: 20px;
+}
+
+</style>
+</body>
+</html>
