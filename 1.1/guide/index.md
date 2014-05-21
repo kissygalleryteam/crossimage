@@ -68,13 +68,13 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   ```javascript
    S.use('gallery/crossimage/1.1/', function (S, Crossimage) {
 
-   var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
-       finalUrl;
-       
-   finalUrl = Crossimage.smartAdjustImgUrl(srcUrl,120,120);
+     var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
+         finalUrl;
+         
+     finalUrl = Crossimage.smartAdjustImgUrl(srcUrl,120,120);
    });
   ```
-  更多sample，详见[demo](http://gallery.kissyui.com/crossimage/1.1/demo/)
+### 更多sample，详见[demo](http://gallery.kissyui.com/crossimage/1.1/demo/index.html)
 
 ## DataLazyload插件API
 ### Step 1. img标签的用法
