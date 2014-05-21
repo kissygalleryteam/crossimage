@@ -39,7 +39,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
      * 我们正着手在server端处理，不久以后就会有通用方案面世。敬请期待！
 
 
-## 自行处理图片URL
+## 调整图片URL
 
 ### smartAdjustImgUrl 【荐】
   * 根据需要显示的图片宽高，自动结合屏幕参数等信息，处理URL
@@ -76,8 +76,8 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    });
   ```
 
-## DataLazyload插件API
-### Step 1. img标签的用法
+## 作为DataLazyload插件使用
+### Step 1. img标签的规范
 
    * 针对需要lazy-load的图片，必须申明```width```和```heigth```属性
    
