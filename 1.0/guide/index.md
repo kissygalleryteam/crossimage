@@ -40,17 +40,18 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
 
 ## 自行处理图片URL
- API:
+### API:
 
   ```javascript
+   //注：此方法不处理屏幕的ppi，如需结合ppi，可以手动计算，或者使用新版本组件。
    Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,{
      quality:50, //支持的图片参数：95,90,75,50,30
      ignoreHeight:true, //忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
-     ignoreWidth:false
+     ignoreWidth:false //类似的，只处理高度
    }])
   ```
-
-  Sample:
+  
+###  Sample:
 
   ```javascript
    S.use('gallery/crossimage/1.0/', function (S, Crossimage) {
