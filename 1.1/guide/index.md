@@ -45,7 +45,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   * 根据需要显示的图片宽高，自动结合屏幕参数等信息，处理URL
 
     ```javascript
-     Crossimage.adjustImgUrl(srcUrl,showW,showH,{
+     Crossimage.smartAdjustImgUrl(srcUrl,showW,showH,{
        quality:50,         //选填，支持的图片压缩参数：95,90,75,50,30
        ignoreHeight:true,  //选填，是否忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
        ignoreWidth:false   //选填，是否忽略宽度
