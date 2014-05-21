@@ -3,7 +3,7 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：1.1 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
+* 版本：1.1 <strong style="color:#F00;">此版本处于beta阶段，如您不认识作者，不建议使用</strong>
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/1.1/demo/index.html](http://gallery.kissyui.com/crossimage/1.1/demo/index.html)
 * 备用demo：[http://ottomao.github.io/crossimage/1.1/demo/](http://ottomao.github.io/crossimage/1.1/demo/) gallery常会挂掉，你懂的
@@ -40,15 +40,27 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 
 
 ## 自行处理图片URL
-### API:
+
+### smartAdjustImgUrl 【荐】
+  * 根据需要显示的图片宽高，自动结合屏幕参数等信息，处理URL
+
+    ```javascript
+     Crossimage.adjustImgUrl(srcUrl,showW,showH,{
+       quality:50,         //选填，支持的图片压缩参数：95,90,75,50,30
+       ignoreHeight:true,  //选填，是否忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
+       ignoreWidth:false   //选填，是否忽略宽度
+     }]);
+    ```
+
+### adjustImgUrl
+  * 根据需要下载的图片宽高和自定义Q参数，处理URL。注意，此方法不涉及ppi和图像尺寸的自动适配，仅作为CDN参数拼装用。
 
   ```javascript
-   //注：此方法不处理屏幕的ppi，如需结合ppi，可以手动计算，或者使用新版本组件的smartAdjustImgUrl方法。
-   Crossimage.adjustImgUrl(srcUrl,expectW,exptectH[,{
-     quality:50, //必填。支持的图片压缩参数：95,90,75,50,30
-     ignoreHeight:true, //忽略高度，只处理宽度，类似lazyload中的crossimage-widthOnly
-     ignoreWidth:false //类似的，只处理高度
-   }])
+   Crossimage.adjustImgUrl(srcUrl,finalW,finalH,{
+     quality:50,           //此方法中，quality必填，其余选填
+     ignoreHeight:true,
+     ignoreWidth:false 
+   }]);
   ```
 
 ###  Sample:
@@ -56,21 +68,13 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   ```javascript
    S.use('gallery/crossimage/1.1/', function (S, Crossimage) {
 
-     //直接调用图片地址处理方法,普通图片
-     var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
-         finalUrl;
-
-     finalUrl = Crossimage.adjustImgUrl(srcUrl,800,800);
-     console.log("new urlA : " + finalUrl);
-
-     //直接调用图片地址处理方法,只处理宽度
-     var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
-         finalUrl;
-
-     finalUrl = Crossimage.adjustImgUrl(srcUrl,120,120,{ignoreHeight:true,quality:50});
-     console.log("new urlB: " + finalUrl); 
+   var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
+       finalUrl;
+       
+   finalUrl = Crossimage.smartAdjustImgUrl(srcUrl,120,120);
    });
   ```
+  更多sample，详见[demo](http://gallery.kissyui.com/crossimage/1.1/demo/)
 
 ## DataLazyload插件API
 ### Step 1. img标签的用法
