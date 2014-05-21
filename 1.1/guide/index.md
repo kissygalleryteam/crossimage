@@ -64,6 +64,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   ```
 
 ###  Sample:
+  * 更多sample，详见[demo](http://gallery.kissyui.com/crossimage/1.1/demo/index.html)
 
   ```javascript
    S.use('gallery/crossimage/1.1/', function (S, Crossimage) {
@@ -74,7 +75,6 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
      finalUrl = Crossimage.smartAdjustImgUrl(srcUrl,120,120);
    });
   ```
-### 更多sample，详见[demo](http://gallery.kissyui.com/crossimage/1.1/demo/index.html)
 
 ## DataLazyload插件API
 ### Step 1. img标签的用法
