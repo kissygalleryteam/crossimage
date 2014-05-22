@@ -3,10 +3,10 @@
 CrossImage是一个天猫前端与核心系统部合作出品的插件。
 它结合cdn的缩放参数和屏幕情况，自动加载最适合的图片，节省流程，提高用户体验，同时也降低了开发成本。
 
-* 版本：1.1 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
+* 版本：1.0 <strong style="color:#A8AD42;">此版本已经开发完成，不会再有覆盖式发布，请安心使用 ^_^</strong>
 * 作者：加里（茅晓锋）
-* demo：[http://gallery.kissyui.com/crossimage/1.1/demo/index.html](http://gallery.kissyui.com/crossimage/1.1/demo/index.html)
-* 备用demo：[http://ottomao.github.io/crossimage/1.1/demo/](http://ottomao.github.io/crossimage/1.1/demo/) gallery常会挂掉，你懂的
+* demo：[http://gallery.kissyui.com/crossimage/1.0/demo/index.html](http://gallery.kissyui.com/crossimage/1.0/demo/index.html)
+* 备用demo：[http://ottomao.github.io/crossimage/1.0/demo/](http://ottomao.github.io/crossimage/1.0/demo/) gallery常会挂掉，你懂的
 * Change Log:
   * **[升级用户请关注]修改了crossimage-ignore相关属性的名称**
   * **[升级用户请关注]adjustImage的参数API做了修改**
@@ -54,7 +54,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 ###  Sample:
 
   ```javascript
-   S.use('gallery/crossimage/1.1/', function (S, Crossimage) {
+   S.use('gallery/crossimage/1.0/', function (S, Crossimage) {
 
      //直接调用图片地址处理方法,普通图片
      var srcUrl = "http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
@@ -97,7 +97,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * Sample
 
    ```javascript
-   S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/1.1/', function (S,DataLazyload, Crossimage) {
+   S.use('gallery/datalazyload/1.0.1/,gallery/crossimage/1.0/', function (S,DataLazyload, Crossimage) {
 
       //方法A 使用默认配置
       var conf = {};
@@ -132,7 +132,7 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 ### 测试用原图
   
 * 17.4M，60张，平均290k
-* 测试用图均为实际业务线上的商品大图，可见 http://gallery.kissyui.com/crossimage/1.1/demo/test.html
+* 测试用图均为实际业务线上的商品大图，可见 http://gallery.kissyui.com/crossimage/1.0/demo/test.html
 * 目标显示尺寸300x300。高清屏按dpr=2计算，下载600x600
 
 ### 测试结果
