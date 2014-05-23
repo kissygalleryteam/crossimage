@@ -117,10 +117,10 @@ KISSY.add('gallery/crossimage/1.1/webp',function(S) {
 	    }
 	    function isSupportTest(cb) {
 	        var img = new Image();
-	        img.src = "data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==";
 	        img.onload = img.onerror = function() {
 	            cb(img.width > 0 && img.height > 0);
 	        };
+	        img.src = "data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==";
 	    }
 	    WebP.isSupport = function(cb) {
 	        if (!cb) return;
