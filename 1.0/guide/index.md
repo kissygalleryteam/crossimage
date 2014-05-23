@@ -166,3 +166,14 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 考虑到CDN的等比缩放特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
    * 如果有多个尺寸的距离值均为最佳，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的CDN参数
  * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
+
+ <script>
+ var _hmt = _hmt || [];
+ (function() {
+   var hm = document.createElement("script");
+   hm.src = "//hm.baidu.com/hm.js?e058a9aa67ba94a08182c3719a474d68";
+   var s = document.getElementsByTagName("script")[0]; 
+   s.parentNode.insertBefore(hm, s);
+ })();
+ </script>
+
