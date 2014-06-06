@@ -1,0 +1,165 @@
+/**
+ * @fileoverview 
+ * @author 加里（茅晓锋）<xiaofeng.mxf@taobao.com>
+ * @module crossimage
+ **/
+
+KISSY.add(function (S,cdnNearest,WebpSupport,EnvDetector) {
+
+    //webp后缀，不设开关
+    var WEBPSUFFIX              = "",
+        DEFAULT_QUALITY         = 90,
+        DEFAULT_HD_JPG_QUALITY  = 50,
+        DEFAULT_HD_WEBP_QUALITY = 75,
+        DEFAULT_M_WIFI_QUALITY  = 90,
+        DEFAULT_M_3G_QUALITY    = 50;
+
+
+    WebpSupport.isSupport(function(isSupport){
+        WEBPSUFFIX = isSupport ? "_.webp" : "";
+    });
+
+    //处理质量参数的相关策略，因为涉及webp，要异步
+    function getQuality(userQuality,callback){
+        var resultQuality;
+        if(userQuality){ //用户指定了质量参数
+            resultQuality = userQuality;
+            callback && callback(resultQuality);
+
+        }else{
+            resultQuality = DEFAULT_QUALITY;
+            if(getDevicePixelRatio() > 1){
+                WebpSupport.isSupport(function(isSupport){
+                    resultQuality = isSupport ? DEFAULT_HD_WEBP_QUALITY : DEFAULT_HD_JPG_QUALITY;
+                    callback && callback(resultQuality);
+                });                
+            }else{
+                callback && callback(resultQuality);
+            }         
+        }
+    }
+
+    //配齐quality,ignore相关参数，调整尺寸
+    function adjustImgUrl(srcUrl,finalW,finalH,config){
+        if(!srcUrl || (!finalW && !finalH) ) return srcUrl;
+        var quality;
+        if(!config || !config.quality){ //没有指定quality
+            quality = DEFAULT_QUALITY;
+            getQuality(null,function(q){
+                quality = q;
+            });
+        }else{
+            quality = config.quality;
+        }
+
+        var rawSrc = srcUrl.replace(/_\d+x\d+(q\d+)?\.jpg/g,"").replace(/_q\d+\.jpg/g,"").replace(/_\.webp/,""),
+            finalSrc,
+            cdnW,
+            cdnH,
+            ignoreWidth  = (config && config.ignoreWidth),
+            ignoreHeight = (config && config.ignoreHeight);
+
+        //寻找最匹配的宽高
+        var targetPair = cdnNearest({
+            w : finalW, 
+            h : finalH,
+            ignoreWidth  : ignoreWidth,
+            ignoreHeight : ignoreHeight
+        });
+
+        if(!targetPair || !targetPair.w || !targetPair.h){ //没找到合适的cdn尺寸,只处理压缩参数
+            finalSrc = rawSrc + "_q@Q.jpg@WEBP".replace(/@Q/ , quality).replace(/@WEBP/,WEBPSUFFIX);
+
+        }else{
+            cdnW = targetPair.w;
+            cdnH = targetPair.h;
+            finalSrc = rawSrc + "_@Wx@Hq@Q.jpg@WEBP".replace(/@W/i,cdnW).replace(/@H/i,cdnH).replace(/@Q/,quality).replace(/@WEBP/,WEBPSUFFIX);
+        }
+
+        return finalSrc;
+    }
+
+    //根据expect值，结合dpr，自动调整URL
+    function smartAdjustImgUrl(srcUrl,showW,showH,config){
+        var finalW = showW,
+            finalH = showH;
+        showW && (finalW = showW * getDevicePixelRatio());
+        showH && (finalH = showH * getDevicePixelRatio());
+        return adjustImgUrl(srcUrl,finalW,finalH,config);
+    }
+
+    //兼容IE6，7，8
+    function hasAttribute(el,name){
+        if(el.hasAttribute){
+            return el.hasAttribute(name);
+        }else{
+            return (typeof el.getAttribute(name) == "string");
+        }
+    }
+
+    function datalazyPlugin(config){
+        var _self = this,
+            defaultConfig = {
+                quality : DEFAULT_QUALITY, //默认载入q90
+                userPPI : getDevicePixelRatio()
+            };
+
+        _self.config = S.merge(defaultConfig,config);
+        if(!(config && config.quality)){
+            getQuality(undefined, function(q){
+                _self.config.quality = q;
+            });
+        }
+
+        function dealLazyObj(obj){
+            if(obj.type!="img" || !obj.elem || !obj.src || !/http/.test(obj.src) || hasAttribute(obj.elem,"crossimage-ignore") ) return;
+
+            if(hasAttribute(obj.elem,"crossimage-widthOnly")){ //widthOnly模式，但未指定宽度
+                if(!obj.elem.width) return;
+            }else if(hasAttribute(obj.elem,"crossimage-heightOnly")){
+                if(!obj.elem.height) return;
+            }else{
+                if(!obj.elem.height || !obj.elem.width) {
+                    return;
+                }
+            }
+
+            try{
+                var imgEle = obj.elem,
+                    expectW = imgEle.width * _self.config.userPPI,
+                    expectH = imgEle.height * _self.config.userPPI,
+                    currentSrc = obj.src,
+                    finalSrc;
+
+                finalSrc = adjustImgUrl(currentSrc,expectW,expectH,{
+                    quality      : _self.config.quality,
+                    ignoreWidth  : hasAttribute(obj.elem,"crossimage-heightOnly"),
+                    ignoreHeight : hasAttribute(obj.elem,"crossimage-widthOnly")
+                });
+                obj.src = finalSrc;
+
+                if(_self.config && _self.config.debug && window.console){
+                    console.log("ppi : " + _self.config.userPPI);
+                    console.log("webp : " + WEBPSUFFIX);
+                    console.log("src: __xx__y expect : __ax__b".replace(/__a/,expectW).replace(/__b/,expectH).replace(/__x/,imgEle.width).replace(/__y/,imgEle.height));
+                    console.log("target: " + finalSrc);
+                    console.log("===========");
+                }
+            }catch(e){}
+        }
+        return dealLazyObj;
+    }
+
+    //获取devicePixelRatio的值
+    //当devicePixelRatio > 2时，为保证文件下载体积，取2
+    function getDevicePixelRatio(){
+        return ((window.devicePixelRatio) && (window.devicePixelRatio > 1)) ? 2 : 1 ; 
+    }
+
+    return {
+        DatalazyPlugin      : datalazyPlugin, //Class
+        adjustImgUrl        : adjustImgUrl,
+        smartAdjustImgUrl   : smartAdjustImgUrl
+    }
+
+}, {requires:['./cdnNearest', './webp' , './envDetector']});
