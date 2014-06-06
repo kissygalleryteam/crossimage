@@ -13,29 +13,12 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   * 新增对Wx10000这种只处理一条边长的图片进行支持
   * 为组件增加单元测试 
 
+## 完整文档
 
-## 相关背景
 
-   * CDN的图片适配调整功能：[内网TFS百科](http://baike.corp.taobao.com/index.php/CS_RD/tfs/http_server#.E5.B0.BA.E5.AF.B8.E7.94.B3.E8.AF.B7.E6.B5.81.E7.A8.8B)
-   * ipad / Retina Macbook / 各种移动端 ，屏幕PPI不一致。高清化的场景下，需要图片自动适配？
-   * 想尝试高性价比的[webp图片](https://developers.google.com/speed/webp/)，还要担心兼容性？能不能根据浏览器环境全自动？
-   * **为了解决上述问题，天猫前端与核心系统部合作出品```cross image```组件，它力求能在跨终端的场景下完成图片适配，并降低前端同学的开发成本。**
-   * ![功能结构图](http://gtms01.alicdn.com/tps/i1/T14TEnFKxbXXaJE4Yg-1027-382.png_720x720.jpg)
-   
-## 功能和原理
+## 完整文档
+* 包括测试数据，项目背景等，请[见内网](http://gitlab.alibaba-inc.com/cross/crossimage/blob/master/README.md)
 
-   * 插件内置了所有CDN支持的参数列表，会将用户的期望尺寸、屏幕参数、CDN参数进行匹配，找到最合适的尺寸后缀
-
-   * [DataLazyload](http://gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)插件功能
-     * 在DataLazyload ```onStart```事件中安插函数，在图片加载前干预url
-     * **【尺寸适配】** 根据图片的宽高和CDN支持的参数列表，添加最合适的图片后缀
-     * **【PPI调整】** 根据屏幕PPI值，自动调整图片尺寸和q参数。
-     * **【Webp】** 自动探测浏览器的webp兼容性，兼容的情况下将自动引入webp图片，节省流量
-     * **【url容错】** 针对运营同学复制url引发的后缀重复定义（如 _q90.jpg_q90.jpg），会自动容错。
-
-   * 如果图片是HTML同步输出在页面上，不是异步载入，怎么处理？
-     * JS组件不适合这种场景
-     * 我们正着手在server端处理，不久以后就会有通用方案面世。敬请期待！
 
 
 ## 调整图片URL
@@ -128,47 +111,6 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
    * 无论原src带了何种参数后缀，都会被忽略并重新处理
    * 这里的api和0.1版稍有不同，请升级用户关注
    * 其他问题：请联系作者 xiaofeng.mxf@taobao.com
-
- 
-## 图片流量测试数据
-
-### 测试用原图
-  
-* 17.4M，60张，平均290k
-* 测试用图均为实际业务线上的商品大图，可见 http://gallery.kissyui.com/crossimage/1.1/demo/test.html
-* 目标显示尺寸300x300。高清屏按dpr=2计算，下载600x600
-
-### 测试结果
-* 不加q参数，300x300
-  * jpg 3.8M
-  * webp 2.3M
-
-* q90,300x300 
-  * jpg 1.8M - <strong style="color:red">普通屏幕+jpg默认方案</strong>
-  * webp 1.3M - <strong style="color:red">普通屏幕+webp默认方案</strong>
-
-* q50,600x600
-  * jpg 2.6M - <strong style="color:red">高清屏+jpg默认方案</strong>
-  * webp 1.7M
-
-* q75,600x600
-  * jpg 3.7M
-  * webp 2.3M - <strong style="color:red">高清屏+webp默认方案</strong>
-
-* q90,600x600
-  * jpg 5.5M
-  * webp 3.5M
-
-
-## 如何计算“最合适的尺寸”？
- * 定义：期望值(称为expect_x , expect_y) = img标签上申明的尺寸（width 和 height) * ppi
- * 定义：CDN_x , CDN_y 为CDN支持的缩放参数列表
- * 匹配原则
-   * 从CDN参数列表中，找出宽度、高度均大于等于期望值的项，形成候选集
-   * 遍历上述候选集中的元素，逐一与期望尺寸进行距离计算，距离越小，匹配越佳。
-   * 考虑到CDN的等比缩放特性，距离函数定义为 min( CDN_x - expect_x , CDN_y - expect_y )
-   * 如果有多个尺寸的距离值均为最佳，取[曼哈顿距离](http://zh.wikipedia.org/zh/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2)最小的CDN参数
- * 若无法匹配，则不对尺寸进行处理（只进行webp/质量参数压缩等操作）
 
  <script>
  var _hmt = _hmt || [];
