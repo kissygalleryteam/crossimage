@@ -13,6 +13,6 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
   * 新增对Wx10000这种只处理一条边长的图片进行支持
   * 为组件增加单元测试 
 
-## 完整文档见内网：http://gitlab.alibaba-inc.com/cross/crossimage/tree/master
+## 完整文档及更多跨终端API见内网：http://gitlab.alibaba-inc.com/cross/crossimage/tree/master
 
 

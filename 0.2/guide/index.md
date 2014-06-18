@@ -8,6 +8,6 @@ CrossImage是一个天猫前端与核心系统部合作出品的插件。
 * 作者：加里（茅晓锋）
 * demo：[http://gallery.kissyui.com/crossimage/0.2/demo/index.html](http://gallery.kissyui.com/crossimage/0.2/demo/index.html)
 
-## 完整文档见内网：http://gitlab.alibaba-inc.com/cross/crossimage/tree/master
+## 完整文档及更多跨终端API见内网：http://gitlab.alibaba-inc.com/cross/crossimage/tree/master
 
 
