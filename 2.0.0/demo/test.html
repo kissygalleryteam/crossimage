@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>图像流量测试</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.1/seed-min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+	var picList = [  //天猫某个垂直业务上拿来的60个测试图片
+		"http://gi1.md.alicdn.com/bao/uploadedi3/931740308/T2_z5xXc8bXXXXXXXX_!!931740308.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2/1685690872/T2WEKmXSRXXXXXXXXX_!!1685690872.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi1/738580955/T2Bo1rXUxXXXXXXXXX_!!738580955.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/871743890/T2605bXJdaXXXXXXXX_!!871743890.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi1/738580955/T28cOsXJVaXXXXXXXX_!!738580955.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/738580955/T2equsXKhaXXXXXXXX_!!738580955.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi1/738580955/T2CxyGXCNXXXXXXXXX_!!738580955.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi4/738580955/T2_kucXUpXXXXXXXXX_!!738580955.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/1685690872/T2mOdgXRFXXXXXXXXX_!!1685690872.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi2/2002479006/T2i5ZGXpVXXXXXXXXX_!!2002479006.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/T1V4lwXsxXXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/2002479006/T2S7NqXHRXXXXXXXXX_!!2002479006.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi1/871743890/T2J1CoXFxaXXXXXXXX_!!871743890.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi4/738580955/T2.n5oXH8aXXXXXXXX_!!738580955.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/738580955/T2nVCpXTlXXXXXXXXX_!!738580955.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2/859575186/T2GNaeXPdaXXXXXXXX_!!859575186.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/649012701/T2FjwLXAJXXXXXXXXX_!!649012701.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi4/761178460/T21k.JXqdaXXXXXXXX_!!761178460.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2/649012701/T2Fy.LXylXXXXXXXXX_!!649012701.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2/649012701/T286sKXEtXXXXXXXXX_!!649012701.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi4/1732646380/T2n2OcXT4XXXXXXXXX_!!1732646380.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/1732646380/T2hAOoXMdXXXXXXXXX_!!1732646380.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2.0.0043806224/T2CB7QXvxXXXXXXXXX_!!1043806224.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi1/920557011/T2TFkLXB4XXXXXXXXX_!!920557011.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi3/T1ew_QFsNaXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2/1574568070/T2zDBAXPVXXXXXXXXX_!!1574568070.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi4/T1dwyvFsBjXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi4/649012701/T21g.OXwhXXXXXXXXX_!!649012701.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2.0.0687868681/T2n0ecXABXXXXXXXXX_!!1687868681.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2/1687868681/T2yRjlXehbXXXXXXXX_!!1687868681.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi4/1050468978/T2wA7QXBNXXXXXXXXX_!!1050468978.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi4/920557011/T2dWAOXtpXXXXXXXXX_!!920557011.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi1/T13UemFrFeXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi3/1050468978/T2yUkMXxVXXXXXXXXX_!!1050468978.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2.0.0706965598/T2fu9jXMlaXXXXXXXX_!!1706965598.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi3/487318649/T2uo7KXypXXXXXXXXX_!!487318649.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2.0.0752295206/T2EekPXsFaXXXXXXXX_!!1752295206.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2/1854306396/T2QQU3XXdbXXXXXXXX_!!1854306396.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2.0.0752295206/T2I0OwXKtXXXXXXXXX_!!1752295206.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2.0.0752295206/T2aDQKXzXXXXXXXXXX_!!1752295206.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2/T1Vc4eFR4dXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi3/T1cf0pFsJcXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2/1734796729/T2u91rXKBaXXXXXXXX_!!1734796729.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2/1734796729/T2WbfHXsXXXXXXXXXX_!!1734796729.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi3/T1n3HnFBXaXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/14448031333466926/T1t5TrFktXXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi3/903172256/T2v7G2XBFaXXXXXXXX-903172256.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi4/689640323/T2aVM9XpVXXXXXXXXX_!!689640323.jpg",
+		"http://gi3.md.alicdn.com/bao/uploadedi4/920557011/T22iGdXI0aXXXXXXXX_!!920557011.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2.0.0706965598/T2LD22XBBXXXXXXXXX_!!1706965598.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2.0.0706965598/T2PrkZXrNaXXXXXXXX_!!1706965598.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi3/1706965598/T2gfERXE8XXXXXXXXX_!!1706965598.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/T1DE2NFC8bXXXXXXXX_!!0-item_pic.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi2/1027841556/T2X6KXXORXXXXXXXXX_!!1027841556.gif",
+		"http://gi1.md.alicdn.com/bao/uploadedi4/1027841556/T22deXXOXXXXXXXXXX_!!1027841556.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi3/1027841556/T2EVx9XGdaXXXXXXXX_!!1027841556.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi2.0.0804033223/T2WnGsXNpXXXXXXXXX_!!1804033223.jpg",
+		"http://gi2.md.alicdn.com/bao/uploadedi4/1804033223/T2nFegXFVaXXXXXXXX_!!1804033223.jpg",
+		"http://gi4.md.alicdn.com/bao/uploadedi4/1804033223/T2caitXI0XXXXXXXXX_!!1804033223.jpg",
+		"http://gi1.md.alicdn.com/bao/uploadedi2.0.0027841556/T2p5KbXOFaXXXXXXXX_!!1027841556.jpg"
+	];
+
+
+	//demo调试代码
+	KISSY.Config.debug = true;
+	if (KISSY.Config.debug) {
+	    var srcPath = "../../";
+	    KISSY.config({
+	        packages:[
+	            {
+	                name:"kg/crossimage",
+	                path:srcPath,
+	                charset:"utf-8",
+	                ignorePackageNameInUri:true
+	            }
+	        ]
+	    });
+	}
+
+
+
+	KISSY.use(['node','kg/crossimage/1.0/'], function (S,Node, Crossimage) {
+		var testType = 1; 
+
+		var imgTpl = '<img src=__src width="300" height="300" />';
+		for(var i = 0 ; i < window.picList.length ; i++){
+			var imgUrl = picList[i],
+				resultUrl;
+
+			if(testType == 0){ //测试原图
+				resultUrl = imgUrl;		
+			}else if(testType == 1){ //各种特殊图的参数调整
+				resultUrl = Crossimage.adjustImgUrl(imgUrl,600,600);
+				// resultUrl = Crossimage.adjustImgUrl(imgUrl,600,600,90);
+			}
+
+			Node.one("body").append(imgTpl.replace(/__src/,resultUrl));
+		}
+	});
+
+</script>
+
+</body>
+</html>
